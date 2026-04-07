@@ -9,16 +9,6 @@ The SBA guaranteed over **$27 billion in small business loans** in 2023 alone. W
 
 This project asks: **can we predict loan default before disbursement, using only information available at the time of approval?**
 
-If yes, a model like this could help SBA loan officers flag high-risk applications earlier, reducing losses without turning away creditworthy borrowers. It also tests a common assumption in lending: that **franchised businesses are safer bets # SBA Loan Default Prediction
-
----
-
-## Why This Matters
-
-The SBA guaranteed over **$27 billion in small business loans** in 2023 alone. When a loan defaults, the SBA absorbs the loss — meaning taxpayer money covers the gap. Yet approval decisions today still rely heavily on manual judgment and simple credit checks.
-
-This project asks: **can we predict loan default before disbursement, using only information available at the time of approval?**
-
 If yes, a model like this could help SBA loan officers flag high-risk applications earlier, reducing losses without turning away creditworthy borrowers. It also tests a common assumption in lending: that **franchised businesses are safer bets than independent ones** — and finds the answer is more complicated than a yes or no.
 
 ---
@@ -196,55 +186,8 @@ Created for academic purposes — QST IS 823, Boston University, Spring 2026.
 [SBA_README.md](https://github.com/user-attachments/files/26545381/SBA_README.md)
 than independent ones** — and finds the answer is more complicated than a yes or no.
 
-## Overview
 
-This project analyzes over 400,000 historical SBA (Small Business Administration) loans to predict whether a small business will default. Using Python, I performed end-to-end data cleaning, exploratory data analysis, machine learning, borrower clustering, and model stress testing.
 
-The target variable is **ChargedOff** — derived from `MIS_Status`: `CHGOFF` → 1 (defaulted), `P I F` → 0 (paid in full).
-
-**Core question:** Are franchised businesses safer bets for SBA loans than independent businesses?
-
----
-
-## Dataset
-
-- **Source:** [Should This Loan Be Approved or Denied?](https://www.kaggle.com/datasets/mirbektoktogaraev/should-this-loan-be-approved-or-denied/data) — Kaggle
-- **File:** `SBAnational.csv`
-- **Size:** 400,000+ rows, 34 columns
-- **Class distribution:** ~78% paid in full, ~22% defaulted
-
-> The full dataset was used — no sampling was applied.
-
----
-
-## Data Cleaning
-
-All preprocessing was done in Python:
-
-- Stripped `$` signs and commas from currency columns (`DisbursementGross`, `BalanceGross`, `ChgOffPrinGr`, `GrAppv`, `SBA_Appv`) and cast to numeric
-- Dropped rows with nulls in all columns except `NoEmp`, `CreateJob`, `RetainedJob`, `ChgOffDate`
-- Removed invalid rows where:
-  - `City`, `Zip`, or `NAICS` contained only a single character
-  - `ApprovalFY` was non-numeric
-  - `Term` was 0
-  - `NewExist` was not 1 or 2
-  - `RevLineCr` or `LowDoc` was not `Y` or `N`
-
----
-
-## Feature Engineering
-
-| Feature | Description |
-|---|---|
-| `ChargedOff` | Target: 1 = defaulted, 0 = paid in full (from `MIS_Status`) |
-| `Franchised` | 1 = franchise, 0 = independent (derived from `FranchiseCode`) |
-| `NewExist` | Recoded: 0 = existing business, 1 = new business |
-| `RevLineCr` | Recoded: Y → 1, N → 0 |
-| `LowDoc` | Recoded: Y → 1, N → 0 |
-| `NAICS_2Digit_Code` | First 2 digits of NAICS code (industry sector) |
-| `SBA_Guarantee_Pct` | `SBA_Appv / GrAppv` — share of loan guaranteed by SBA |
-
----
 
 ## Exploratory Data Analysis
 
