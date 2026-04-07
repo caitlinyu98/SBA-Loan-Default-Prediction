@@ -40,9 +40,9 @@ The target variable is **ChargedOff** — derived from `MIS_Status`: `CHGOFF` �
 
 | Model | AUC | Accuracy | Recall (Defaulted) |
 |---|---|---|---|
-| Logistic Regression | 0.856 | — | 38% |
-| Decision Tree | 0.947 | — | 74% |
-| **Random Forest** | **0.970** | **—** | **81%** |
+| Logistic Regression | 0.856 | 0.83 | 38% |
+| Decision Tree | 0.947 | 0.91 | 74% |
+| **Random Forest** | **0.970** | **0.94** | **81%** |
 
 > Fill in Accuracy column from your classification report outputs.
 
@@ -70,7 +70,7 @@ Random Forest (green) pulls away from the other two models, hugging the top-left
 
 ---
 
-## Key Findings
+## Key Findings 
 
 **1. Loan term is the #1 predictor.**
 Longer loan terms are strongly associated with higher default rates. This is a signal lenders can act on at approval time.
@@ -138,10 +138,13 @@ An 81% recall Random Forest means 1 in 5 defaults still slips through. Before de
 ### Clustering
 K-means (`k=4`) on loan size, term, SBA guarantee %, employee count, franchise status, and business age — to identify distinct borrower risk profiles.
 
-### Stress Testing
-- Train vs. test AUC gap check (overfitting)
-- Dummy classifier baseline comparison
-- 5-fold cross-validation
+## Model Stress Testing
+
+Three checks were run to validate model reliability:
+
+1. **Overfitting check** — Train AUC vs. Test AUC gap (flagged if > 0.05)
+2. **Dummy classifier baseline** — compared against a model that always predicts the majority class
+3. **5-fold cross-validation** — mean AUC and standard deviation across folds
 
 ---
 
@@ -185,125 +188,3 @@ sba-loan-default-prediction/
 Created for academic purposes — QST IS 823, Boston University, Spring 2026.
 [SBA_README.md](https://github.com/user-attachments/files/26545381/SBA_README.md)
 than independent ones** — and finds the answer is more complicated than a yes or no.
-
-
-
-
-## Exploratory Data Analysis
-
-Visualizations produced:
-
-- Overall loan outcome distribution
-- Default rate: Franchise vs. Independent
-- Default rate by industry (NAICS sector)
-- Default rate over time by `ApprovalFY` (with 2008 financial crisis callout)
-- Default rate: New vs. Existing business
-- Default rate: LowDoc vs. Standard loans
-- Loan amount distribution by outcome
-- SBA Guarantee % distribution by outcome
-- Default rate by industry, broken down by franchise status
-- Correlation heatmap across numeric features
-
----
-
-## Machine Learning
-
-### Features Used
-
-```
-Franchised, NewExist, Term, DisbursementGross, GrAppv,
-SBA_Guarantee_Pct, LowDoc, RevLineCr, UrbanRural,
-NoEmp, NAICS_2Digit_Code, ApprovalFY
-```
-
-### Pipeline
-
-1. One-hot encode `NAICS_2Digit_Code` and `UrbanRural`
-2. 70/30 train/test split (stratified by `ChargedOff`)
-3. MinMax normalization
-4. Train three models:
-   - **Logistic Regression** (`max_iter=1000`)
-   - **Decision Tree** (`max_depth=5`)
-   - **Random Forest** (`n_estimators=100`, `n_jobs=-1`)
-
-### Results
-
-| Model | AUC | Recall (Defaulted) |
-|---|---|---|
-| Logistic Regression | 0.856 | 38% |
-| Decision Tree | 0.947 | 74% |
-| **Random Forest** | **0.970** | **81%** |
-
-Evaluation included ROC curves, confusion matrices, classification reports, and Random Forest feature importance.
-
-> **Note:** Accuracy alone is misleading here — a model that always predicts "Paid in Full" would score ~78% accuracy but catch zero defaults. ROC-AUC and recall are the primary metrics.
-
----
-
-## Clustering (Borrower Profiles)
-
-K-means clustering (`k=4`) was applied to identify distinct borrower segments:
-
-**Features used:** `DisbursementGross`, `Term`, `SBA_Guarantee_Pct`, `NoEmp`, `Franchised`, `NewExist`
-
-Each cluster was profiled by default rate, average loan size, average term, and franchise share.
-
----
-
-## Model Stress Testing
-
-Three checks were run to validate model reliability:
-
-1. **Overfitting check** — Train AUC vs. Test AUC gap (flagged if > 0.05)
-2. **Dummy classifier baseline** — compared against a model that always predicts the majority class
-3. **5-fold cross-validation** — mean AUC and standard deviation across folds
-
----
-
-## Key Findings
-
-- **Loan term** is the strongest predictor of default.
-- **Franchise businesses** default at a lower rate than independents, but the difference narrows when controlling for industry.
-- **Business age** (new vs. existing) showed virtually no difference — 21.5% vs. 21.4% default rate — and is not a meaningful predictor on its own.
-- **LowDoc loans** counterintuitively have *lower* default rates than standard loans, likely due to selection bias (more established borrowers) and the program's discontinuation post-2008.
-- The **2008–09 financial crisis** is clearly visible as a spike in default rates by approval year.
-- All three models passed overfitting and cross-validation checks.
-
----
-
-## Project Structure
-
-```
-sba-loan-default-prediction/
-│
-├── SBA_Loans.ipynb    # Full pipeline: cleaning, EDA, ML, clustering, stress tests
-└── README.md
-```
-
----
-
-## How to Run
-
-1. Install dependencies:
-   ```bash
-   pip install pandas numpy matplotlib seaborn plotly scikit-learn imbalanced-learn jupyter
-   ```
-
-2. Clone the repo:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/sba-loan-default-prediction.git
-   cd sba-loan-default-prediction
-   ```
-
-3. Download `SBAnational.csv` from [Kaggle](https://www.kaggle.com/datasets/mirbektoktogaraev/should-this-loan-be-approved-or-denied/data) and place it in the project folder.
-
-4. Launch Jupyter and run all cells:
-   ```bash
-   jupyter notebook SBA_Loans.ipynb
-   ```
-
----
-
-## License
-
-This project was created for academic purposes as part of QST IS 823 at Boston University.
