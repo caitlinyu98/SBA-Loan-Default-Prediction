@@ -9,7 +9,7 @@ The SBA guaranteed over **$27 billion in small business loans** in 2023 alone. W
 
 This project asks: **can we predict loan default before disbursement, using only information available at the time of approval?**
 
-If yes, a model like this could help SBA loan officers flag high-risk applications earlier, reducing losses without turning away creditworthy borrowers. It also tests a common assumption in lending: that **franchised businesses are safer bets than independent ones** — and finds the answer is more complicated than a yes or no.
+If yes, a model like this could help SBA loan officers flag high-risk applications earlier, reducing losses without turning away creditworthy borrowers. It also tests a common assumption in lending: that **franchised businesses are safer bets than independent ones** and finds the answer is more complicated than a yes or no.
 
 ---
 
