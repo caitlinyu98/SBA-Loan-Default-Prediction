@@ -68,13 +68,15 @@ Random Forest (green) pulls away from the other two models, hugging the top-left
 
 ### Confusion Matrices
 
-![Confusion Matrices](images/confusion_matrices.png)
+<img width="1416" height="390" alt="confusion_matrices" src="https://github.com/user-attachments/assets/7d2faf41-e53e-4cb6-a52e-7a9abe090bf7" />
+
 
 ### Feature Importance
 
 **Term** is the single most dominant predictor by a wide margin, followed by approval year and loan amount — all information available before disbursement.
 
-![Feature Importance](images/feature_importance.png)
+<img width="989" height="590" alt="feature_importance" src="https://github.com/user-attachments/assets/d2beaa70-824c-432e-b155-f2186f552c0c" />
+
 
 ---
 
@@ -86,7 +88,8 @@ Longer loan terms are strongly associated with higher default rates. This is a s
 **2. Franchises default less — but lose more when they do.**
 Franchise businesses show a lower overall default rate than independents (~15.8% vs ~21.2%). However, when controlling for industry sector, the gap narrows significantly. And when franchises do default, the loss-per-dollar tends to be higher. The "franchise = safe" assumption is an oversimplification.
 
-![Franchise vs Independent Default Rate](images/franchise_vs_independent.png)
+<img width="630" height="470" alt="franchise_vs_independent" src="https://github.com/user-attachments/assets/8ecda6df-99e2-42f6-a615-a7f3bd043dcf" />
+
 
 **3. Business age is not a useful predictor.**
 New vs. existing businesses defaulted at virtually identical rates — 21.5% vs. 21.4%. This feature added no predictive power.
@@ -97,14 +100,15 @@ Less paperwork ≠ more risk. LowDoc loans had lower default rates than standard
 **5. The 2008–09 financial crisis is clearly visible in the data.**
 Default rates spiked sharply for loans approved around 2006–2008, confirming the model's ability to capture macroeconomic risk patterns over time.
 
-![Default Rate Over Time](images/default_rate_over_time.png)
+<img width="987" height="390" alt="default_rate_over_time" src="https://github.com/user-attachments/assets/7907dd27-f7bf-4a96-b650-431cf21ba6c5" />
+
 
 ---
 
 ## So What? — Practical Implications
 
 **For SBA loan officers:**
-Loan term and SBA guarantee percentage are strong pre-approval signals. Applications with very long terms or unusually high SBA exposure relative to total loan size warrant extra scrutiny — even if other indicators look clean.
+Loan term and SBA guarantee percentage are strong pre-approval signals. Applications with very long terms or unusually high SBA exposure relative to total loan size warrant extra scrutiny even if other indicators look clean.
 
 **For franchise lenders:**
 Don't give franchises a blanket pass. The default rate advantage is real but small once you control for industry. Focus on the specific sector and loan structure, not just the franchise flag.
@@ -113,7 +117,7 @@ Don't give franchises a blanket pass. The default rate advantage is real but sma
 The LowDoc finding suggests that simplifying the loan application process does not necessarily increase risk — in fact, it may select for more reliable borrowers. This could inform future program design.
 
 **For the model itself:**
-An 81% recall Random Forest means 1 in 5 defaults still slips through. Before deploying in a real lending context, the cost of a missed default (false negative) vs. a wrongly rejected borrower (false positive) needs to be explicitly calibrated into the threshold — this model is a starting point, not a decision-maker.
+An 81% recall Random Forest means 1 in 5 defaults still slips through. Before deploying in a real lending context, the cost of a missed default (false negative) vs. a wrongly rejected borrower (false positive) needs to be explicitly calibrated into the threshold. This model is a starting point and not a decision-maker.
 
 ---
 
