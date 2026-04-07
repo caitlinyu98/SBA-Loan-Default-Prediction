@@ -44,8 +44,6 @@ The target variable is **ChargedOff** — derived from `MIS_Status`: `CHGOFF` �
 | Decision Tree | 0.947 | 0.91 | 74% |
 | **Random Forest** | **0.970** | **0.94** | **81%** |
 
-> Fill in Accuracy column from your classification report outputs.
-
 **Random Forest** is the best model. At 81% recall, it correctly flags 4 out of 5 loans that will actually default — catching far more risk than the other models.
 
 > ⚠️ **Why not just use accuracy?** A model that predicts "Paid in Full" for every loan would score ~78% accuracy but catch zero defaults. Recall and AUC are what actually matter here.
