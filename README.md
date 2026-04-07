@@ -5,7 +5,7 @@ Analyzing 400K+ SBA loans to test whether franchises default less than independe
 
 ## Why This Matters
 
-The SBA guaranteed over **$27 billion in small business loans** in 2023 alone. When a loan defaults, the SBA absorbs the loss — meaning taxpayer money covers the gap. Yet approval decisions today still rely heavily on manual judgment and simple credit checks.
+The SBA guaranteed over **$27 billion in small business loans** in 2023 alone. When a loan defaults, the SBA absorbs the loss which means that taxpayer money covers the gap. Yet approval decisions today still rely heavily on manual judgment and simple credit checks.
 
 This project asks: **can we predict loan default before disbursement, using only information available at the time of approval?**
 
