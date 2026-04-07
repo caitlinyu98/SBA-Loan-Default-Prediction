@@ -1,6 +1,16 @@
 # SBA-Loan-Default-Prediction
 Analyzing 400K+ SBA loans to test whether franchises default less than independent businesses and predict loan defaults using machine learning (Random Forest AUC: 0.970).
 
+---
+
+## Why This Matters
+
+The SBA guaranteed over **$27 billion in small business loans** in 2023 alone. When a loan defaults, the SBA absorbs the loss — meaning taxpayer money covers the gap. Yet approval decisions today still rely heavily on manual judgment and simple credit checks.
+
+This project asks: **can we predict loan default before disbursement, using only information available at the time of approval?**
+
+If yes, a model like this could help SBA loan officers flag high-risk applications earlier, reducing losses without turning away creditworthy borrowers. It also tests a common assumption in lending: that **franchised businesses are safer bets than independent ones** — and finds the answer is more complicated than a yes or no.
+
 ## Overview
 
 This project analyzes over 400,000 historical SBA (Small Business Administration) loans to predict whether a small business will default. Using Python, I performed end-to-end data cleaning, exploratory data analysis, machine learning, borrower clustering, and model stress testing.
